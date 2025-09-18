@@ -1,4 +1,5 @@
 import './index.css'
+import Datepicker from './components/Datepicker'
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
             Hello KBTG
           </text>
         </svg>
+      </div>
+      <div className="mt-8">
+        <Datepicker />
       </div>
       <style>{`
         @keyframes bounce-slow {
