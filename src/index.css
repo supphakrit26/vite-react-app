@@ -2,6 +2,112 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Theme tokens inspired by the provided dashboard design */
+:root {
+  --bg-page: #e9e2f5; /* soft lavender */
+  --card-bg: #ffffff;
+  --muted: #9aa3b2;
+  --accent-1: #7c3aed; /* purple */
+  --accent-2: #6b46c1; /* darker purple */
+  --accent-3: #06b6d4; /* cyan */
+  --radius-lg: 16px;
+  --radius-md: 10px;
+  --shadow-soft: 0 8px 24px rgba(16,24,40,0.08);
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--bg-page);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Card utility to reuse */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: 1rem;
+}
+
+/* Sidebar card */
+.sidebar-card {
+  background: linear-gradient(180deg, #fff 0%, #fbfbff 100%);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+/* small rounded badge */
+.badge {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  color: white;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* Dashboard layout styles */
+.dashboard-root {
+  padding: 3rem 1.5rem;
+}
+.dashboard-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), #fff);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+}
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr 320px;
+  gap: 1.5rem;
+  align-items: start;
+}
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 12px;
+  color: #4b5563;
+}
+.nav-item.active {
+  background: rgba(124,58,237,0.12);
+  color: var(--accent-2);
+}
+.topbar {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.search-box {
+  background: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(16,24,40,0.04);
+  width: 420px;
+}
+.courses-row { display:flex; gap:1rem; align-items:flex-start }
+.course-card { width: 220px; border-radius: 12px; padding: 1rem; box-shadow: 0 6px 18px rgba(16,24,40,0.06); }
+.course-card .title { font-weight:700; margin-top:0.5rem }
+.profile-card { display:flex; flex-direction:column; align-items:center; gap:0.5rem; padding:1rem; border-radius:12px }
+
+@media (max-width: 1024px) {
+  .dashboard-grid { grid-template-columns: 1fr; }
+  .search-box { width: 100%; }
+}
+
+
 /* Custom CSS for colorful animated background and text (plain CSS to avoid Tailwind utility-resolution) */
 .bg-animated-gradient {
   background: linear-gradient(135deg, #7c3aed 0%, #06b6d4 25%, #34d399 50%, #fb7185 75%, #f97316 100%);
