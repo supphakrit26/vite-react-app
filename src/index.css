@@ -15,14 +15,22 @@
 
 .fancy-text {
   /* explicit properties instead of @apply to avoid CSS parser errors in some editors */
+  /* use transparent text with background-clip, but provide a visible gradient and strong shadow */
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
+  /* fallback if background-clip unsupported */
+  -webkit-text-fill-color: transparent;
   font-weight: 800;
-  background: linear-gradient(90deg, #7c3aed, #c026d3, #fb7185);
+  /* include a bright stop so the text contrasts against similar-toned backgrounds */
+  background: linear-gradient(90deg, #ffffff 0%, #7c3aed 30%, #c026d3 60%, #fb7185 100%);
   background-size: 200% 200%;
   animation: text-gradient 5s linear infinite;
-  text-shadow: 0 10px 30px rgba(124,58,237,0.18);
+  /* stronger shadow and subtle stroke to ensure legibility */
+  text-shadow: 0 6px 24px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.04);
+  -webkit-text-stroke: 0.4px rgba(0,0,0,0.12);
+  /* fallback color in case clipping fails */
+  color: #ffffff;
 }
 
 .animate-bounce-slow {
