@@ -3,9 +3,21 @@ import './index.css'
 function App() {
   return (
     <div className="w-full min-h-screen flex items-center justify-center bg-animated-gradient">
-      <h1 aria-label="Greeting" role="heading" className="w-full text-center text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl leading-tight fancy-text animate-bounce-slow max-w-95vw">
-        Hello KBTG
-      </h1>
+      <div className="svg-container animate-bounce-slow" role="img" aria-label="Greeting">
+        <svg viewBox="0 0 1200 200" preserveAspectRatio="xMidYMid meet" className="greeting-svg">
+          <defs>
+            <linearGradient id="g1" x1="0%" x2="100%" y1="0%" y2="0%">
+              <stop offset="0%" stopColor="#ffd166" />
+              <stop offset="40%" stopColor="#06b6d4" />
+              <stop offset="70%" stopColor="#7c3aed" />
+              <stop offset="100%" stopColor="#fb7185" />
+            </linearGradient>
+          </defs>
+          <text x="50%" y="50%" textAnchor="middle" dominantBaseline="middle" className="greeting-text" fill="url(#g1)">
+            Hello KBTG
+          </text>
+        </svg>
+      </div>
       <style>{`
         @keyframes bounce-slow {
           0%, 100% { transform: translateY(0); }

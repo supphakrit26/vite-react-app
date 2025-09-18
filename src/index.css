@@ -8,9 +8,21 @@
   background-size: 400% 400%;
   background-repeat: no-repeat;
   background-position: center center;
+  position: relative;
   width: 100vw;
   min-height: 100vh;
   animation: gradient-anim 10s ease infinite;
+}
+
+/* subtle dark overlay so the background doesn't 'bleed' through the transparent text
+   — this makes the clipped text gradient visually distinct from the page background */
+.bg-animated-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .fancy-text {
@@ -19,18 +31,36 @@
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  /* fallback if background-clip unsupported */
+  /* ensure text is actually transparent for WebKit (required for many browsers) */
   -webkit-text-fill-color: transparent;
+  /* make the element shrink to the text so the gradient follows the letters, not the full-width box */
+  display: inline-block;
   font-weight: 800;
-  /* include a bright stop so the text contrasts against similar-toned backgrounds */
-  background: linear-gradient(90deg, #ffffff 0%, #7c3aed 30%, #c026d3 60%, #fb7185 100%);
+  /* ensure the heading renders above the overlay */
+  position: relative;
+  z-index: 2;
+  /* include a bright, high-contrast gradient so the text stands out against the animated background */
+  background: linear-gradient(90deg, #ffd166 0%, #06b6d4 40%, #7c3aed 70%, #fb7185 100%);
   background-size: 200% 200%;
   animation: text-gradient 5s linear infinite;
   /* stronger shadow and subtle stroke to ensure legibility */
-  text-shadow: 0 6px 24px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.04);
-  -webkit-text-stroke: 0.4px rgba(0,0,0,0.12);
-  /* fallback color in case clipping fails */
-  color: #ffffff;
+  text-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.06);
+  -webkit-text-stroke: 0.6px rgba(0,0,0,0.18);
+}
+
+/* Fallback for browsers that don't support background-clip: text (e.g., older Firefox) */
+@supports not (-webkit-background-clip: text) {
+  .fancy-text {
+    /* show solid color instead of clipped gradient */
+    color: #ffffff;
+    /* reset any webkit-only fill so the color displays */
+    -webkit-text-fill-color: initial;
+    /* remove the background so it doesn't look like a panel */
+    background: none;
+    /* keep a strong shadow to help legibility on animated backgrounds */
+    text-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    -webkit-text-stroke: 0.6px rgba(0,0,0,0.18);
+  }
 }
 
 .animate-bounce-slow {
@@ -38,6 +68,16 @@
 }
 
 .max-w-95vw { max-width: 95vw; }
+
+/* SVG greeting styles */
+.svg-container { width: 95vw; max-width: 1100px; }
+.greeting-svg { width: 100%; height: auto; display: block; }
+.greeting-text {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 800;
+  font-size: 120px; /* base size — scalable via viewBox */
+  text-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.06);
+}
 
 @keyframes gradient-anim {
   0% { background-position: 0% 50%; }
