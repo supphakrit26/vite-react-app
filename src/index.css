@@ -2,6 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom Tailwind utilities and keyframes for colorful animated background and text */
+@layer utilities {
+  .bg-animated-gradient {
+    background: linear-gradient(135deg, #7c3aed 0%, #06b6d4 25%, #34d399 50%, #fb7185 75%, #f97316 100%);
+    background-size: 400% 400%;
+    animation: gradient-anim 10s ease infinite;
+  }
+
+  .fancy-text {
+    @apply text-transparent bg-clip-text font-extrabold;
+    background: linear-gradient(90deg, #7c3aed, #c026d3, #fb7185);
+    background-size: 200% 200%;
+    animation: text-gradient 5s linear infinite;
+    text-shadow: 0 10px 30px rgba(124,58,237,0.18);
+  }
+
+  .animate-bounce-slow {
+    animation: bounce-slow 2.5s ease-in-out infinite;
+  }
+
+  .max-w-95vw { max-width: 95vw; }
+}
+
+@keyframes gradient-anim {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes text-gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
